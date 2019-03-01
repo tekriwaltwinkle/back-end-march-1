@@ -1,0 +1,14 @@
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\bin\Debug\netcoreapp2.2\quiz_pro.deps.json
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\bin\Debug\netcoreapp2.2\quiz_pro.runtimeconfig.json
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\bin\Debug\netcoreapp2.2\quiz_pro.runtimeconfig.dev.json
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\bin\Debug\netcoreapp2.2\quiz_pro.dll
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.csprojAssemblyReference.cache
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.csproj.CoreCompileInputs.cache
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.RazorAssemblyInfo.cache
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.RazorAssemblyInfo.cs
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.AssemblyInfoInputs.cache
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.AssemblyInfo.cs
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.RazorTargetAssemblyInfo.cache
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\bin\Debug\netcoreapp2.2\quiz_pro.pdb
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.dll
+C:\Users\HP PC\source\repos\quiz_pro\quiz_pro\obj\Debug\netcoreapp2.2\quiz_pro.pdb
