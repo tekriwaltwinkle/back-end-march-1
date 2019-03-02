@@ -15,96 +15,117 @@ namespace quiz_pro.Controllers
     [Route("api/[controller]")]
     public class questionsController : Controller
     {
-        private IQuizRepo<question> _context;
-        public questionsController(IQuizRepo<question> context) { _context = context;}
 
+        private readonly dbContext _context;
+        public questionsController(dbContext context)
+        {
+            _context = context;
+        }
+
+
+        // GET: api/<controller>
         [HttpGet]
-        public IActionResult Get()
+        public IEnumerable<question> Get()
         {
-            return Ok(_context.GetAll());
+            return _context.questions.ToList();
+
         }
+
+        // GET api/<controller>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var question = await
+                _context.questions.SingleOrDefaultAsync(m => m.qID == id);
+
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return Ok(question);
+        }
+
+        // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody] question value)
+        public IEnumerable<question> Post([FromBody] question question)
         {
-           _context.Add(value);
-            return Ok();
+
+
+            _context.questions.Add(question);
+            _context.SaveChanges();
+
+
+            return _context.questions.ToList();
+
         }
-        [HttpDelete("id")]
-        public IActionResult Delete(int id)
+
+        // PUT api/<controller>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] question question)
         {
-            _context.Delete(id);
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != question.qID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(question).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!QuizExists(id))
+                {
+                    return NotFound();
+
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NotFound();
+
         }
 
-       // readonly dbContext context;
 
-       // public questionsController(dbContext context1)
-       // {
-       //     this.context = context1;
-       // }
-       
-            
-            
-       //     // GET: api/<controller>
-       // [HttpGet]
-       // public IEnumerable<Models.question> Get()
-       // {
-       //     return context.questions;
-       // }
 
-       // // GET api/<controller>/5
-       // [HttpGet("{quid}")]
-       // public IEnumerable<Models.question> Get([FromRoute] int quid)
-       // {
-       //     return context.questions.Where(q => q.quID == quid);
-       //}
+        // DELETE api/<controller>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-       // // POST api/<controller>
-       // [HttpPost]
-       // public async Task<IActionResult> Post([FromBody]Models.question question)
-       // {
-       //     var quiz = context.quizs.SingleOrDefault(q => q.qID == question.quID);
-       //     if (quiz == null)
-       //         return NotFound();
+            var question = await
+                _context.quizs.SingleOrDefaultAsync(m => m.qID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
 
-       //     context.questions.Add(question);
-       //     await context.SaveChangesAsync();
-       //     return Ok(question);
-       // }
+            _context.quizs.Remove(question);
+            await _context.SaveChangesAsync();
 
-       // // PUT api/<controller>/5
-       // [HttpPut("{id}")]
-       // public async Task<IActionResult> Put(int id, [FromBody]Models.question question)
-       // {
-       //     if (id != question.qID)
-       //         return BadRequest();
-       //     context.Entry(question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-       //     await context.SaveChangesAsync();
-       //     return Ok(question);
-       // }
+            return Ok(question);
+        }
 
-       // // DELETE api/<controller>/5
-       // [HttpDelete("{id}")]
-       // public async Task<IActionResult> Delete([FromRoute] int id)
-       // {
-       //     if (!ModelState.IsValid)
-       //     {
-       //         return BadRequest(ModelState);
-       //     }
-
-       //     var question = await
-       //         context.questions.SingleOrDefaultAsync(m => m.quID == id);
-       //     if (question == null)
-       //     {
-       //         return NotFound();
-       //     }
-
-       //     context.questions.Remove(question);
-       //     await context.SaveChangesAsync();
-
-       //     return Ok(question);
-       // }
-
-      
+        private bool QuizExists(int id)
+        {
+            return _context.quizs.Any(e => e.qID == id);
+        }
     }
 }

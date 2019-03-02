@@ -29,17 +29,17 @@ namespace quiz_pro.Models.repos
             }
         }
 
-        public void Delete(int Entity)
+        public void Delete(quiz Entity)
         {
-        //    try
-        //    {
-        //        _context.quizs.Remove(Entity);
-        //        _context.SaveChanges();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //    }
+            try
+            {
+                _context.quizs.Remove(Entity);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Update(quiz Entity)

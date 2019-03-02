@@ -8,39 +8,79 @@ namespace quiz_pro.Models.repos
     public class scoreRepo : IQuizRepo<score>
     {
         private dbContext _context;
+
+
+
         public scoreRepo(dbContext context)
         {
             _context = context;
         }
 
-        public void Add(score entity)
+        public void Add(score Entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.scores.Add(Entity);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        public void Delete(int entity)
+        public void Delete(score Entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.scores.Remove(Entity);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        public IEnumerable<score> GetAll()
+        public void Update(score Entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                score score = _context.scores.Find(Entity.scoreId);
+                score.username = Entity.username;
+                score.title = Entity.title;
+                score.marks = Entity.marks;
+                score.date = Entity.date;
+                score.uID = Entity.uID;
+                score.qID = Entity.qID;
+        
+
+
+        _context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+
+        }
+
+        public IEnumerable<score> GetByName(string Title)
+        {
+            return _context.scores.Where((q) => q.username == Title).ToList();
         }
 
         public score GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.scores.Find(id);
         }
 
-        public IEnumerable<score> GetByName(string Name)
+        public IEnumerable<score> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(score entity)
-        {
-            throw new NotImplementedException();
+            return _context.scores.ToList();
         }
     }
 }

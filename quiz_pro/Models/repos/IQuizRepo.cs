@@ -11,7 +11,7 @@ namespace quiz_pro.Models.repos
         IEnumerable<TEntity> GetByName(string Name);
         TEntity GetById(int id);
         void Add(TEntity entity);
-        void Delete(int entity);
+        void Delete(TEntity entity);
         void Update(TEntity entity);
 
     }

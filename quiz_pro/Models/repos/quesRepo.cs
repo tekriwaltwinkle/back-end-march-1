@@ -26,11 +26,11 @@ namespace quiz_pro.Models.repos
             }
         }
 
-        public void Delete(int Entity)
+        public void Delete(question Entity)
         {
             try
             {
-                var ques = _context.questions.SingleOrDefault(m => m.quID == Entity);
+                var ques = _context.questions.SingleOrDefault(m => m.quID == Entity.quID);
                 _context.questions.Remove(ques);
                 _context.SaveChanges();
             }
